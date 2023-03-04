@@ -8,21 +8,23 @@ import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val cityNames = arrayOf("Delhi","Agra","Mathura","Chandigarh","Jaipur","Noida","Gurgaon")
+        val listview = findViewById<ListView>(R.id.listview)
 
-        val cities = findViewById<ListView>(R.id.cities)
+        val taskList = arrayOf("Eating", "Read Book", "Complete the project", "Learn HTML", "Go market", "Upload a Video")
 
-        val cityAdapter = ArrayAdapter(this,android.R.layout.simple_list_item_1, cityNames)
-
-        cities.adapter = cityAdapter
-
-        cities.setOnItemClickListener { adapterView, view, position, id ->
-            val city: TextView = view as TextView
-            Toast.makeText(this,city.text, Toast.LENGTH_SHORT).show()
+        //adapter gives data to the listview
+        val myAdapter = ArrayAdapter(this,android.R.layout.simple_list_item_1, taskList)
+        listview.adapter = myAdapter
+        
+        listview.setOnItemClickListener { parent, view, position, id->  
+            val text = "Clicked on Item : " + (view as TextView).text.toString()
+            Toast.makeText(this,text, Toast.LENGTH_SHORT).show()
         }
+
     }
 }
